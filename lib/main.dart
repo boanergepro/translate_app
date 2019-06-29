@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: routes,
+    return MaterialApp(
+      routes: routes,
       theme: ThemeData(
         backgroundColor: Colors.grey[300],
         buttonColor: Colors.green,
@@ -23,29 +24,33 @@ class MyApp extends StatelessWidget {
 class Translate extends StatefulWidget {
   @override
   _TranslateState createState() => new _TranslateState();
- }
+}
+
 class _TranslateState extends State<Translate> {
   GoogleTranslator translator = new GoogleTranslator();
   TextEditingController inputController = new TextEditingController();
   String _translate = '...';
 
   void _actionTranlate() async {
-    var i = await translator.translate(inputController.text, from: 'auto', to: 'zh-cn');
+    var i = await translator.translate(inputController.text,
+        from: 'auto', to: 'zh-cn');
     setState(() {
       _translate = i;
-      print(_translate);     
+      print(_translate);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return new Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.add),onPressed: () {
-            Navigator.pushNamed(context, WelcomeScreen.routerName);
-          },)
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed(context, WelcomeScreen.routerName);
+            },
+          )
         ],
         title: Text('Traductor'),
       ),
@@ -57,9 +62,8 @@ class _TranslateState extends State<Translate> {
             TextField(
               controller: inputController,
               autocorrect: true,
-              decoration: InputDecoration(
-                hintText: 'Ingrese el texto a traducir'
-              ),
+              decoration:
+                  InputDecoration(hintText: 'Ingrese el texto a traducir'),
             ),
             FlatButton(
               color: Colors.orange,

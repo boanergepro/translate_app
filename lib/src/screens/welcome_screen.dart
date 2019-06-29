@@ -76,40 +76,41 @@ class WelcomeScreen extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: Container(
-                              padding: EdgeInsets.only(
-                                right: 15,
-                                left: 15,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Spacer(
-                                    flex: 3,
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: RaisedButton(
-                                      color: Colors.green,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          10.0,
-                                        ),
+                            padding: EdgeInsets.only(
+                              right: 15,
+                              left: 15,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Spacer(
+                                  flex: 3,
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: RaisedButton(
+                                    color: Colors.green,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        10.0,
                                       ),
-                                      child: Text(
-                                        'Continue',
-                                        style: TextStyle(
-                                            fontFamily: 'Lato',
-                                            fontSize: 15.0,
-                                            color: Colors.white),
-                                      ),
-                                      onPressed: () {},
                                     ),
+                                    child: Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                          fontFamily: 'Lato',
+                                          fontSize: 15.0,
+                                          color: Colors.white),
+                                    ),
+                                    onPressed: () {},
                                   ),
-                                  Spacer(
-                                    flex: 3,
-                                  )
-                                ],
-                              )),
+                                ),
+                                Spacer(
+                                  flex: 3,
+                                )
+                              ],
+                            ),
+                          ),
                         )
                       ],
                     ),
