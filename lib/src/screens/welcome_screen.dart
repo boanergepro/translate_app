@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:translate_app/src/screens/example.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static final routerName = '/welcome-screen';
@@ -102,7 +103,9 @@ class WelcomeScreen extends StatelessWidget {
                                           fontSize: 15.0,
                                           color: Colors.white),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(Translate.routerName);
+                                    },
                                   ),
                                 ),
                                 Spacer(
