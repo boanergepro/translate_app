@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         backgroundColor: Colors.grey[300],
         buttonColor: Colors.green,
-        primarySwatch: Colors.orange,
       ),
       home: Translate(),
     );
