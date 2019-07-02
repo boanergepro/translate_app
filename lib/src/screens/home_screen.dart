@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:translator/translator.dart';
 import 'package:translate_app/src/providers/app.dart';
 import 'package:translate_app/src/utils/theme.dart';
+import 'package:translate_app/src/resources/languages.dart';
+import 'package:translate_app/src/utils/translate.dart';
 
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
+  String from;
+  String to;
 
   @override
   Widget build(BuildContext context) {
@@ -80,40 +85,31 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
+                        flex: 4,
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            value: 1,
+                            isExpanded: true,
+                            onChanged: (value) {
+                              appState.languageFrom = value;
+                            },
+                            items: languages.entries.map((MapEntry entry) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  entry.value,
+                                  style: TextStyle(
+                                    fontFamily: 'Lato',
+                                  ),
+                                ),
+                                value: entry.key,
+                              );
+                            }).toList(),
                             hint: Text(
                               'Language',
                               style: TextStyle(
                                 fontFamily: 'Lato',
-                                fontSize: 15.0,
                               ),
                             ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text(
-                                  'Espanol',
-                                  style: TextStyle(
-                                    fontFamily: 'Lato',
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  'Ingles',
-                                  style: TextStyle(
-                                    fontFamily: 'Lato',
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                value: 2,
-                              ),
-                            ],
-                            onChanged: (value) {},
+                            value: appState.languageFrom,
                           ),
                         ),
                       ),
@@ -121,12 +117,14 @@ class HomeScreen extends StatelessWidget {
                         flex: 1,
                       ),
                       Expanded(
-                        flex: 1,
+                        flex: 3,
                         child: CircleAvatar(
                           backgroundColor: Colors.grey[200],
                           child: IconButton(
                             color: Colors.black,
-                            onPressed: () {},
+                            onPressed: () {
+                              Translate.exchangeLanguages(context);
+                            },
                             icon: Icon(
                               Icons.compare_arrows,
                             ),
@@ -137,40 +135,31 @@ class HomeScreen extends StatelessWidget {
                         flex: 1,
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: 4,
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            value: 2,
+                            isExpanded: true,
+                            onChanged: (value) {
+                              appState.languageTo = value;
+                            },
+                            items: languages.entries.map((MapEntry entry) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  entry.value,
+                                  style: TextStyle(
+                                    fontFamily: 'Lato',
+                                  ),
+                                ),
+                                value: entry.key,
+                              );
+                            }).toList(),
                             hint: Text(
                               'Language',
                               style: TextStyle(
                                 fontFamily: 'Lato',
-                                fontSize: 15.0,
                               ),
                             ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text(
-                                  'Espanol',
-                                  style: TextStyle(
-                                    fontFamily: 'Lato',
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  'Ingles',
-                                  style: TextStyle(
-                                    fontFamily: 'Lato',
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                value: 2,
-                              ),
-                            ],
-                            onChanged: (value) {},
+                            value: appState.languageTo,
                           ),
                         ),
                       )
