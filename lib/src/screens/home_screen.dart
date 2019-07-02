@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:translator/translator.dart';
 import 'package:translate_app/src/providers/app.dart';
 import 'package:translate_app/src/utils/theme.dart';
 import 'package:translate_app/src/resources/languages.dart';
@@ -72,7 +71,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: _screenHeight / 1.1,
+          height: _screenHeight / 1.2,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -242,57 +241,66 @@ class HomeScreen extends StatelessWidget {
                 flex: 1,
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(
-                  padding: EdgeInsets.only(left: 15, right: 15),
+                  padding: EdgeInsets.only(
+                    left: 15,
+                  ),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
                     itemBuilder: (context, int index) {
-                      return Card(
-                        child: Container(
-                          width: 200,
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 1,
-                                child: Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                              ),
-                              Spacer(
-                                flex: 1,
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Container(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'Text English',
-                                        style: TextStyle(
-                                          fontFamily: 'Lato',
-                                          fontSize: 12.0,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Text Spanish',
-                                        style: TextStyle(
-                                          fontFamily: 'Lato',
-                                          fontSize: 12.0,
-                                        ),
-                                      )
-                                    ],
+                      return Row(
+                        children: <Widget>[
+                          Card(
+                            child: Container(
+                              width: 300,
+                              padding: EdgeInsets.all(10),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 1,
+                                    child: Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
+                                  Spacer(
+                                    flex: 1,
+                                  ),
+                                  Expanded(
+                                    flex: 5,
+                                    child: Container(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            'Text English',
+                                            style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              fontSize: 12.0,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Text Spanish',
+                                            style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              fontSize: 12.0,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          Divider(
+                            indent: 10,
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -302,6 +310,59 @@ class HomeScreen extends StatelessWidget {
                 flex: 1,
               )
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: IconButton(
+                icon: Icon(
+                  Icons.star_border,
+                  color: Colors.grey[300],
+                ),
+                onPressed: () {},
+              ),
+            ),
+            Spacer(
+              flex: 2,
+            ),
+            Expanded(
+              flex: 2,
+              child: IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  color: Colors.grey[300],
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
+      resizeToAvoidBottomPadding: false,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Theme(
+        data: Theme.of(context).copyWith(
+          highlightColor: Colors.white,
+        ),
+        child: FloatingActionButton(
+          onPressed: () {},
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent[200],
+              borderRadius: BorderRadius.circular(30),
+            ),
+            height: 45,
+            width: 45,
+            child: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
