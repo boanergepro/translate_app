@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:translate_app/src/providers/app.dart';
+import 'package:translate_app/src/utils/theme.dart';
 
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
@@ -7,6 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppProvider>(context);
     double _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -45,9 +49,14 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      CustomTheme.changeTheme(context);
+                    },
                     icon: Icon(
-                      Icons.brightness_2,
+                      appState.currentTheme != ThemeData.dark()
+                          ? Icons.brightness_2
+                          : Icons.brightness_high,
+                      color: CustomTheme.colorIconTheme(context),
                     ),
                   ),
                 ),
