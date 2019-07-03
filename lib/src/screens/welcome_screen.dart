@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:translate_app/src/screens/example.dart';
 import 'package:translate_app/src/screens/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -91,7 +90,7 @@ class WelcomeScreen extends StatelessWidget {
                                 Expanded(
                                   flex: 3,
                                   child: RaisedButton(
-                                    color: Colors.green,
+                                    color: Colors.greenAccent[200],
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                         10.0,
