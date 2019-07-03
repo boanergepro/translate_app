@@ -5,7 +5,9 @@ import 'package:translate_app/src/providers/app.dart';
 import 'package:translate_app/src/utils/theme.dart';
 import 'package:translate_app/src/resources/languages.dart';
 import 'package:translate_app/src/utils/translate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
@@ -16,6 +18,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
     double _screenHeight = MediaQuery.of(context).size.height;
+
+    _translateController.text = appState.currentText;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -33,6 +38,9 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Lato',
                     fontSize: 30.0,
+                    color: appState.currentTheme == ThemeData.dark()
+                        ? Colors.white
+                        : Colors.black,
                   ),
                 ),
                 Text(
@@ -177,6 +185,7 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(10),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,6 +193,7 @@ class HomeScreen extends StatelessWidget {
                               Expanded(
                                 flex: 8,
                                 child: TextField(
+                                  cursorColor: Colors.greenAccent[200],
                                   controller: _translateController,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -191,45 +201,60 @@ class HomeScreen extends StatelessWidget {
                                     contentPadding: EdgeInsets.all(10),
                                   ),
                                   maxLines: 5,
+                                  onEditingComplete: () {
+                                    appState.currentText =
+                                        _translateController.text;
+                                    Translate.translator(context);
+                                  },
                                 ),
                               ),
                               Expanded(
-                                  flex: 2,
-                                  child: Column(
-                                    children: <Widget>[
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.star_border,
-                                          color: Colors.grey[300],
-                                        ),
+                                flex: 2,
+                                child: Column(
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () {
+                                        appState.currentText =
+                                            _translateController.text;
+                                        Translate.translator(context);
+                                      },
+                                      icon: Icon(
+                                        Icons.star_border,
+                                        color: Colors.grey[300],
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          _translateController.text = '';
-                                        },
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: Colors.grey[300],
-                                        ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        _translateController.text = '';
+                                      },
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.grey[300],
                                       ),
-                                    ],
-                                  )),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           Divider(
                             color: Colors.grey[300],
                           ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                'translated text',
-                                style: TextStyle(
-                                  fontFamily: 'Lato',
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                            ],
+                          Expanded(
+                            child: appState.loading
+                                ? Center(
+                                    child: SpinKitThreeBounce(
+                                      color: Colors.greenAccent[200],
+                                      size: 30,
+                                    ),
+                                  )
+                                : Text(
+                                    appState.translatedText,
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
                           )
                         ],
                       ),
@@ -321,7 +346,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.star_border,
-                  color: Colors.grey[300],
+                  color: Colors.grey[400],
                 ),
                 onPressed: () {},
               ),
@@ -334,7 +359,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.refresh,
-                  color: Colors.grey[300],
+                  color: Colors.grey[400],
                 ),
                 onPressed: () {},
               ),
@@ -349,7 +374,10 @@ class HomeScreen extends StatelessWidget {
           highlightColor: Colors.white,
         ),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            appState.currentText = _translateController.text;
+            Translate.translator(context);
+          },
           elevation: 0,
           backgroundColor: Colors.white,
           child: Container(
@@ -360,7 +388,7 @@ class HomeScreen extends StatelessWidget {
             height: 45,
             width: 45,
             child: Icon(
-              Icons.home,
+              Icons.g_translate,
               color: Colors.white,
             ),
           ),
