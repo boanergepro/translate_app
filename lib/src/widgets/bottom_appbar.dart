@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:translate_app/src/screens/item_favorite_screen.dart';
+import 'package:translate_app/src/screens/favorite_screen.dart';
 
 Widget bottomAppBar(context) {
   return BottomAppBar(
@@ -13,7 +13,7 @@ Widget bottomAppBar(context) {
               color: Colors.grey[300],
             ),
             onPressed: () {
-              Navigator.of(context).pushNamed(ItemFavoriteScreen.routerName);
+              Navigator.of(context).pushNamed(FavoriteScreen.routerName);
             },
           ),
         ),

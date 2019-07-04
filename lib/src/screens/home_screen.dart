@@ -10,8 +10,6 @@ import 'package:translate_app/src/widgets/bottom_appbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:translate_app/src/widgets/floating_action_button.dart';
 
-
-
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
@@ -292,7 +290,11 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: bottomAppBar(context),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatingActionButton(context: context,appState: appState,translate: _translateController.text),
+      floatingActionButton: floatingActionButton(
+        context: context,
+        appState: appState,
+        translate: _translateController.text,
+      ),
     );
   }
 }
