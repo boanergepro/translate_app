@@ -7,7 +7,7 @@ import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:translate_app/src/widgets/bottom_appbar.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  static final routerName = '/item_favorite_screen';
+  static final routerName = '/favorite_screen';
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class FavoriteScreen extends StatelessWidget {
       body: Column(
       children: <Widget>[
           Spacer(
-            flex: 1,
+            flex: 2,
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(left: 30),
@@ -53,7 +53,7 @@ class FavoriteScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 15,
+            flex: 25,
             child: Container(
               padding: EdgeInsets.only(right: 15, left: 15),
               child: ListView.builder(
