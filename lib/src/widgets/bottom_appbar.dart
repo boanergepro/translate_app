@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:translate_app/src/screens/item_favorite_screen.dart';
 
-Widget bottomAppBar() {
+Widget bottomAppBar(context) {
   return BottomAppBar(
     child: Row(
       children: <Widget>[
@@ -11,7 +12,9 @@ Widget bottomAppBar() {
               Icons.star_border,
               color: Colors.grey[300],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(ItemFavoriteScreen.routerName);
+            },
           ),
         ),
         Spacer(

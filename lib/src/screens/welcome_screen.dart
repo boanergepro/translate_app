@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translate_app/src/screens/home_screen.dart';
+import 'package:translate_app/src/screens/item_favorite_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static final routerName = '/welcome-screen';

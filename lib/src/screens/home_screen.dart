@@ -7,9 +7,8 @@ import 'package:translate_app/src/utils/translate.dart';
 import 'package:translate_app/src/widgets/appbar.dart';
 import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:translate_app/src/widgets/bottom_appbar.dart';
-import 'package:translate_app/src/widgets/floating_action_button.dart';
-
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:translate_app/src/widgets/floating_action_button.dart';
 
 
 
@@ -290,62 +289,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 2,
-              child: IconButton(
-                icon: Icon(
-                  Icons.star_border,
-                  color: Colors.grey[400],
-                ),
-                onPressed: () {},
-              ),
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            Expanded(
-              flex: 2,
-              child: IconButton(
-                icon: Icon(
-                  Icons.refresh,
-                  color: Colors.grey[400],
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: bottomAppBar(context),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(
-          highlightColor: Colors.white,
-        ),
-        child: FloatingActionButton(
-          onPressed: () {
-            appState.currentText = _translateController.text;
-            Translate.translator(context);
-          },
-          elevation: 0,
-          backgroundColor: Colors.white,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.greenAccent[200],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            height: 45,
-            width: 45,
-            child: Icon(
-              Icons.g_translate,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: floatingActionButton(context: context,appState: appState,translate: _translateController.text),
     );
   }
 }

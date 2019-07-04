@@ -101,10 +101,10 @@ class ItemFavoriteScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: bottomAppBar(),
+      bottomNavigationBar: bottomAppBar(context),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatingActionButton(context),
+      floatingActionButton: floatingActionButton(context:context),
     );
   }
 }
