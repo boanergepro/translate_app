@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:translate_app/src/providers/app.dart';
-import 'package:translate_app/src/utils/theme.dart';
 import 'package:translate_app/src/resources/languages.dart';
 import 'package:translate_app/src/utils/translate.dart';
+import 'package:translate_app/src/widgets/appbar.dart';
+import 'package:translate_app/src/widgets/floating_action_button.dart';
+import 'package:translate_app/src/widgets/bottom_appbar.dart';
+import 'package:translate_app/src/widgets/floating_action_button.dart';
 
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
@@ -18,57 +21,7 @@ class HomeScreen extends StatelessWidget {
     double _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        centerTitle: true,
-        title: Stack(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Translate',
-                  style: TextStyle(
-                    fontFamily: 'Lato',
-                    fontSize: 30.0,
-                  ),
-                ),
-                Text(
-                  '.',
-                  style: TextStyle(
-                    fontFamily: 'Lato',
-                    fontSize: 30.0,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Spacer(
-                  flex: 11,
-                ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () {
-                      CustomTheme.changeTheme(context);
-                    },
-                    icon: Icon(
-                      appState.currentTheme != ThemeData.dark()
-                          ? Icons.brightness_2
-                          : Icons.brightness_high,
-                      color: CustomTheme.colorIconTheme(context),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      appBar: appBar(context, appState),
       body: SingleChildScrollView(
         child: Container(
           height: _screenHeight / 1.2,
@@ -249,7 +202,7 @@ class HomeScreen extends StatelessWidget {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
-                    itemBuilder: (context, int index) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Row(
                         children: <Widget>[
                           Card(
@@ -313,59 +266,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 2,
-              child: IconButton(
-                icon: Icon(
-                  Icons.star_border,
-                  color: Colors.grey[300],
-                ),
-                onPressed: () {},
-              ),
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            Expanded(
-              flex: 2,
-              child: IconButton(
-                icon: Icon(
-                  Icons.refresh,
-                  color: Colors.grey[300],
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: bottomAppBar(),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(
-          highlightColor: Colors.white,
-        ),
-        child: FloatingActionButton(
-          onPressed: () {},
-          elevation: 0,
-          backgroundColor: Colors.white,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.greenAccent[200],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            height: 45,
-            width: 45,
-            child: Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: floatingActionButton(context),
     );
   }
 }
