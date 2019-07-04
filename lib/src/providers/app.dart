@@ -63,7 +63,6 @@ class AppProvider with ChangeNotifier {
 
   set currentText(value) {
     _currentText = value;
-    notifyListeners();
   }
 
   set translatedText(value) {

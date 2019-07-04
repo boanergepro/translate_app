@@ -13,8 +13,7 @@ import 'package:translate_app/src/widgets/floating_action_button.dart';
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
-  String from;
-  String to;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +23,7 @@ class HomeScreen extends StatelessWidget {
     _translateController.text = appState.currentText;
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(context, appState),
       body: SingleChildScrollView(
@@ -142,6 +142,7 @@ class HomeScreen extends StatelessWidget {
                               Expanded(
                                 flex: 8,
                                 child: TextField(
+                                  textInputAction: TextInputAction.done,
                                   cursorColor: Colors.greenAccent[200],
                                   controller: _translateController,
                                   decoration: InputDecoration(
@@ -150,10 +151,11 @@ class HomeScreen extends StatelessWidget {
                                     contentPadding: EdgeInsets.all(10),
                                   ),
                                   maxLines: 5,
+                                  onChanged: (value) {
+                                    appState.currentText = value;
+                                  },
                                   onEditingComplete: () {
-                                    appState.currentText =
-                                        _translateController.text;
-                                    Translate.translator(context);
+                                    Translate.translator(context, _scaffoldKey);
                                   },
                                 ),
                               ),
@@ -163,9 +165,6 @@ class HomeScreen extends StatelessWidget {
                                   children: <Widget>[
                                     IconButton(
                                       onPressed: () {
-                                        appState.currentText =
-                                            _translateController.text;
-                                        Translate.translator(context);
                                       },
                                       icon: Icon(
                                         Icons.star_border,
@@ -287,13 +286,14 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: bottomAppBar(context),
+      bottomNavigationBar: bottomAppBar(context, ),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatingActionButton(
         context: context,
         appState: appState,
         translate: _translateController.text,
+        key: _scaffoldKey,
       ),
     );
   }
