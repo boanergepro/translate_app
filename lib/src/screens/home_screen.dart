@@ -9,6 +9,10 @@ import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:translate_app/src/widgets/bottom_appbar.dart';
 import 'package:translate_app/src/widgets/floating_action_button.dart';
 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+
+
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
@@ -19,6 +23,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
     double _screenHeight = MediaQuery.of(context).size.height;
+
+    _translateController.text = appState.currentText;
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(context, appState),
@@ -130,6 +137,7 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(10),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,6 +145,7 @@ class HomeScreen extends StatelessWidget {
                               Expanded(
                                 flex: 8,
                                 child: TextField(
+                                  cursorColor: Colors.greenAccent[200],
                                   controller: _translateController,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -144,45 +153,60 @@ class HomeScreen extends StatelessWidget {
                                     contentPadding: EdgeInsets.all(10),
                                   ),
                                   maxLines: 5,
+                                  onEditingComplete: () {
+                                    appState.currentText =
+                                        _translateController.text;
+                                    Translate.translator(context);
+                                  },
                                 ),
                               ),
                               Expanded(
-                                  flex: 2,
-                                  child: Column(
-                                    children: <Widget>[
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.star_border,
-                                          color: Colors.grey[300],
-                                        ),
+                                flex: 2,
+                                child: Column(
+                                  children: <Widget>[
+                                    IconButton(
+                                      onPressed: () {
+                                        appState.currentText =
+                                            _translateController.text;
+                                        Translate.translator(context);
+                                      },
+                                      icon: Icon(
+                                        Icons.star_border,
+                                        color: Colors.grey[300],
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          _translateController.text = '';
-                                        },
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: Colors.grey[300],
-                                        ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        _translateController.text = '';
+                                      },
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.grey[300],
                                       ),
-                                    ],
-                                  )),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           Divider(
                             color: Colors.grey[300],
                           ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                'translated text',
-                                style: TextStyle(
-                                  fontFamily: 'Lato',
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                            ],
+                          Expanded(
+                            child: appState.loading
+                                ? Center(
+                                    child: SpinKitThreeBounce(
+                                      color: Colors.greenAccent[200],
+                                      size: 30,
+                                    ),
+                                  )
+                                : Text(
+                                    appState.translatedText,
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
                           )
                         ],
                       ),
@@ -266,10 +290,62 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: bottomAppBar(),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: IconButton(
+                icon: Icon(
+                  Icons.star_border,
+                  color: Colors.grey[400],
+                ),
+                onPressed: () {},
+              ),
+            ),
+            Spacer(
+              flex: 2,
+            ),
+            Expanded(
+              flex: 2,
+              child: IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  color: Colors.grey[400],
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatingActionButton(context),
+      floatingActionButton: Theme(
+        data: Theme.of(context).copyWith(
+          highlightColor: Colors.white,
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            appState.currentText = _translateController.text;
+            Translate.translator(context);
+          },
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent[200],
+              borderRadius: BorderRadius.circular(30),
+            ),
+            height: 45,
+            width: 45,
+            child: Icon(
+              Icons.g_translate,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
