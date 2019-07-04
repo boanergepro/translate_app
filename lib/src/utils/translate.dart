@@ -13,16 +13,27 @@ class Translate {
     appState.languageTo = from;
   }
 
-  static translator(BuildContext context) async {
+  static translator(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) async {
     final appState = Provider.of<AppProvider>(context);
-    appState.loading = true;
-    GoogleTranslator translator = new GoogleTranslator();
+    if (appState.currentText != '') {
+      appState.loading = true;
+      GoogleTranslator translator = new GoogleTranslator();
 
-    appState.translatedText = await translator.translate(
-      appState.currentText,
-      from: appState.languageFrom,
-      to: appState.languageTo,
-    );
-    appState.loading = false;
+      appState.translatedText = await translator.translate(
+        appState.currentText,
+        from: appState.languageFrom,
+        to: appState.languageTo,
+      );
+      appState.loading = false;
+    } else {
+     scaffoldKey.currentState.showSnackBar(
+         SnackBar(
+           content: Text('Error! write a text'),
+         ),
+
+     );
+    }
+
+
   }
 }
