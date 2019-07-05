@@ -235,7 +235,7 @@ class HomeScreen extends StatelessWidget {
                                     flex: 1,
                                     child: Icon(
                                       Icons.star,
-                                      color: Colors.yellow,
+                                      color: Colors.greenAccent[200],
                                     ),
                                   ),
                                   Spacer(
@@ -286,7 +286,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: bottomAppBar(context, ),
+       bottomNavigationBar: bottomAppBar(context: context),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatingActionButton(
