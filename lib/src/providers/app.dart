@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppProvider with ChangeNotifier {
   bool _loading;
+  bool _error;
   ThemeData _currentTheme;
   String _languageFrom;
   String _languageTo;
@@ -10,6 +11,7 @@ class AppProvider with ChangeNotifier {
 
   //Constructor
   AppProvider() {
+    _error = false;
     _loading = false;
     _languageFrom = null;
     _languageTo = null;
@@ -22,6 +24,8 @@ class AppProvider with ChangeNotifier {
   }
 
   // Getters
+  bool get error => _error;
+
   bool get loading => _loading;
 
   ThemeData get currentTheme => _currentTheme;
@@ -35,6 +39,10 @@ class AppProvider with ChangeNotifier {
   String get translatedText => _translatedText;
 
   // Setters
+  set error(value) {
+    _error= value;
+    notifyListeners();
+  }
   set loading(value) {
     _loading = value;
     notifyListeners();

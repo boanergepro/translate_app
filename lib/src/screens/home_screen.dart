@@ -13,7 +13,6 @@ import 'package:translate_app/src/widgets/floating_action_button.dart';
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
   TextEditingController _translateController = TextEditingController();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,6 @@ class HomeScreen extends StatelessWidget {
     _translateController.text = appState.currentText;
 
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(context, appState),
       body: SingleChildScrollView(
@@ -155,7 +153,7 @@ class HomeScreen extends StatelessWidget {
                                     appState.currentText = value;
                                   },
                                   onEditingComplete: () {
-                                    Translate.translator(context, _scaffoldKey);
+                                    Translate.translator(context);
                                   },
                                 ),
                               ),
@@ -201,6 +199,7 @@ class HomeScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'Lato',
                                       fontSize: 15.0,
+                                      color: appState.error ? Colors.red : Colors.black,
                                     ),
                                   ),
                           )
@@ -293,7 +292,6 @@ class HomeScreen extends StatelessWidget {
         context: context,
         appState: appState,
         translate: _translateController.text,
-        key: _scaffoldKey,
       ),
     );
   }

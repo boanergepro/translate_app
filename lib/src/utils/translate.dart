@@ -13,7 +13,7 @@ class Translate {
     appState.languageTo = from;
   }
 
-  static translator(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) async {
+  static translator(BuildContext context) async {
     final appState = Provider.of<AppProvider>(context);
     if (appState.currentText != '') {
       appState.loading = true;
@@ -25,15 +25,16 @@ class Translate {
         to: appState.languageTo,
       );
       appState.loading = false;
+      appState.error = false;
+    } else if (appState.languageFrom == null) {
+      appState.error = true;
+      appState.translatedText = 'Error! select language from.';
+    } else if (appState.languageTo == null) {
+      appState.error = true;
+      appState.translatedText = 'Error! select language to.';
     } else {
-     scaffoldKey.currentState.showSnackBar(
-         SnackBar(
-           content: Text('Error! write a text'),
-         ),
-
-     );
+      appState.error = true;
+      appState.translatedText = 'Error! enter a text for translate.';
     }
-
-
   }
 }
