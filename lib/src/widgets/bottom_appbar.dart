@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:translate_app/src/screens/favorite_screen.dart';
 import 'package:translate_app/src/screens/history_screen.dart';
 
-Widget bottomAppBar({context,favorite,history}) {
+Widget bottomAppBar({context, favorite, history}) {
   return BottomAppBar(
     child: Row(
       children: <Widget>[
