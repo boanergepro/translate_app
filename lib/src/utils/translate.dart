@@ -15,14 +15,21 @@ class Translate {
 
   static translator(BuildContext context) async {
     final appState = Provider.of<AppProvider>(context);
-    appState.loading = true;
-    GoogleTranslator translator = new GoogleTranslator();
+    if (appState.currentText != '') {
+      appState.loading = true;
+      GoogleTranslator translator = new GoogleTranslator();
 
-    appState.translatedText = await translator.translate(
-      appState.currentText,
-      from: appState.languageFrom,
-      to: appState.languageTo,
-    );
-    appState.loading = false;
+      appState.translatedText = await translator.translate(
+        appState.currentText,
+        from: appState.languageFrom,
+        to: appState.languageTo,
+      );
+      appState.loading = false;
+      appState.error = false;
+    } else {
+      appState.error = true;
+      appState.translatedText = 'Error! enter a text for translate';
+    }
+
   }
 }

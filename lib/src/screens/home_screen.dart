@@ -150,9 +150,10 @@ class HomeScreen extends StatelessWidget {
                                     contentPadding: EdgeInsets.all(10),
                                   ),
                                   maxLines: 5,
+                                  onChanged: (value) {
+                                    appState.currentText = value;
+                                  },
                                   onEditingComplete: () {
-                                    appState.currentText =
-                                        _translateController.text;
                                     Translate.translator(context);
                                   },
                                 ),
@@ -202,6 +203,7 @@ class HomeScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'Lato',
                                       fontSize: 15.0,
+                                      color: appState.error ? Colors.red : Colors.black,
                                     ),
                                   ),
                           )
