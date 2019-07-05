@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:translate_app/src/screens/home_screen.dart';
 import 'package:translate_app/src/utils/translate.dart';
 
-Widget floatingActionButton({context,appState,translate}){
+Widget floatingActionButton({context,appState,translate, GlobalKey<ScaffoldState> key}){
   return Theme(
     data: Theme.of(context).copyWith(
       highlightColor: Colors.white,
@@ -10,7 +10,7 @@ Widget floatingActionButton({context,appState,translate}){
     child: translate != null ? FloatingActionButton(
       onPressed: () {
         appState.currentText = translate;
-        Translate.translator(context);
+        Translate.translator(context, key);
       },
       elevation: 0,
       backgroundColor: Colors.white,
