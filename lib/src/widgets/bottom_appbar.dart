@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:translate_app/src/screens/favorite_screen.dart';
+import 'package:translate_app/src/screens/history_screen.dart';
 
-Widget bottomAppBar(context) {
+Widget bottomAppBar({context,favorite,history}) {
   return BottomAppBar(
     child: Row(
       children: <Widget>[
@@ -10,7 +11,7 @@ Widget bottomAppBar(context) {
           child: IconButton(
             icon: Icon(
               Icons.star_border,
-              color: Colors.grey[300],
+              color: favorite != null ? Colors.greenAccent[200] : Colors.grey[300]
             ),
             onPressed: () {
               Navigator.of(context).pushNamed(FavoriteScreen.routerName);
@@ -24,10 +25,11 @@ Widget bottomAppBar(context) {
           flex: 2,
           child: IconButton(
             icon: Icon(
-              Icons.refresh,
-              color: Colors.grey[300],
+              Icons.refresh, color: history != null ? Colors.greenAccent[200] : Colors.grey[300]
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(HistoryScreen.routerName);
+            },
           ),
         ),
       ],
