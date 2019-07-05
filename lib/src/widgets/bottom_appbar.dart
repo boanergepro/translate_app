@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translate_app/src/screens/favorite_screen.dart';
+import 'package:translate_app/src/screens/history_screen.dart';
 
 Widget bottomAppBar({context,favorite,history}) {
   return BottomAppBar(
@@ -26,7 +27,9 @@ Widget bottomAppBar({context,favorite,history}) {
             icon: Icon(
               Icons.refresh, color: history != null ? Colors.greenAccent[200] : Colors.grey[300]
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(HistoryScreen.routerName);
+            },
           ),
         ),
       ],
