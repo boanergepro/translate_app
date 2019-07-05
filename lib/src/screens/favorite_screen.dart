@@ -17,7 +17,7 @@ class FavoriteScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar(context, appState),
       body: Column(
-      children: <Widget>[
+        children: <Widget>[
           Spacer(
             flex: 2,
           ),
@@ -67,7 +67,10 @@ class FavoriteScreen extends StatelessWidget {
                         children: <Widget>[
                           Expanded(
                             flex: 1,
-                            child: Icon(Icons.star, color: Colors.green,),
+                            child: Icon(
+                              Icons.star,
+                              color: Colors.greenAccent[200],
+                            ),
                           ),
                           Expanded(
                             flex: 9,
@@ -87,7 +90,7 @@ class FavoriteScreen extends StatelessWidget {
                                     fontFamily: 'Lato',
                                     fontSize: 12.0,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           )
@@ -101,10 +104,10 @@ class FavoriteScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: bottomAppBar(context),
+      bottomNavigationBar: bottomAppBar(context: context, favorite: true),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: floatingActionButton(context:context),
+      floatingActionButton: floatingActionButton(context: context),
     );
   }
 }
