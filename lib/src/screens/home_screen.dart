@@ -9,6 +9,8 @@ import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:translate_app/src/widgets/bottom_appbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:translate_app/src/widgets/floating_action_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:translate_app/src/models/favorite.dart';
 
 class HomeScreen extends StatelessWidget {
   static final routerName = '/home_screen';
@@ -162,7 +164,12 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   children: <Widget>[
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Firestore.instance.collection('favorite').add({
+                                          'translateFrom': appState.currentText,
+                                          'translateTo': appState.translatedText,
+                                        });
+                                      },
                                       icon: Icon(
                                         Icons.star_border,
                                         color: Colors.grey[300],
