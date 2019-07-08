@@ -109,8 +109,9 @@ class FavoriteScreen extends StatelessWidget {
                         iconWidget: Icon(
                           Icons.delete,
                           color: Colors.redAccent,
+                          size: 30,
                         ),
-                        closeOnTap: false,
+                        closeOnTap: true,
                         color: Theme.of(context).backgroundColor,
                         onTap: () {
                           print('touch');
