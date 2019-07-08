@@ -105,7 +105,8 @@ class WelcomeScreen extends StatelessWidget {
                                           color: Colors.white),
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushNamed(HomeScreen.routerName);
+                                      Navigator.of(context)
+                                          .pushNamed(HomeScreen.routerName);
                                     },
                                   ),
                                 ),

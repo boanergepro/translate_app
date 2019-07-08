@@ -162,8 +162,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   children: <Widget>[
                                     IconButton(
-                                      onPressed: () {
-                                      },
+                                      onPressed: () {},
                                       icon: Icon(
                                         Icons.star_border,
                                         color: Colors.grey[300],
@@ -199,7 +198,9 @@ class HomeScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontFamily: 'Lato',
                                       fontSize: 15.0,
-                                      color: appState.error ? Colors.red : Colors.black,
+                                      color: appState.error
+                                          ? Colors.red
+                                          : Colors.black,
                                     ),
                                   ),
                           )
@@ -285,7 +286,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-       bottomNavigationBar: bottomAppBar(context: context),
+      bottomNavigationBar: bottomAppBar(context: context),
       resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: floatingActionButton(

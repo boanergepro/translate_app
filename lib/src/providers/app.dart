@@ -40,9 +40,10 @@ class AppProvider with ChangeNotifier {
 
   // Setters
   set error(value) {
-    _error= value;
+    _error = value;
     notifyListeners();
   }
+
   set loading(value) {
     _loading = value;
     notifyListeners();
