@@ -8,7 +8,6 @@ import 'package:translate_app/src/widgets/appbar.dart';
 import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:translate_app/src/widgets/bottom_appbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:translate_app/src/widgets/floating_action_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:translate_app/src/models/favorite.dart';
 
