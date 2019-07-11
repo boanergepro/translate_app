@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:translate_app/src/providers/app.dart';
 import 'package:translate_app/src/utils/theme.dart';
 
-
-Widget appBar(BuildContext context,AppProvider appState){
+Widget appBar(BuildContext context, AppProvider appState) {
   return AppBar(
     backgroundColor: Theme.of(context).backgroundColor,
     automaticallyImplyLeading: false,
@@ -20,7 +19,9 @@ Widget appBar(BuildContext context,AppProvider appState){
               style: TextStyle(
                 fontFamily: 'Lato',
                 fontSize: 30.0,
-                color: Colors.black
+                color: appState.currentTheme != ThemeData.dark()
+                    ? Colors.black
+                    : Colors.white,
               ),
             ),
             Text(

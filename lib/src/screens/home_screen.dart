@@ -62,6 +62,9 @@ class HomeScreen extends StatelessWidget {
                               'Language',
                               style: TextStyle(
                                 fontFamily: 'Lato',
+                                color: appState.currentTheme != ThemeData.dark()
+                                    ? Colors.grey[600]
+                                    : Colors.white,
                               ),
                             ),
                             value: appState.languageFrom,
@@ -112,6 +115,9 @@ class HomeScreen extends StatelessWidget {
                               'Language',
                               style: TextStyle(
                                 fontFamily: 'Lato',
+                                color: appState.currentTheme != ThemeData.dark()
+                                    ? Colors.grey[600]
+                                    : Colors.white,
                               ),
                             ),
                             value: appState.languageTo,
@@ -164,9 +170,12 @@ class HomeScreen extends StatelessWidget {
                                   children: <Widget>[
                                     IconButton(
                                       onPressed: () {
-                                        Firestore.instance.collection('favorite').add({
+                                        Firestore.instance
+                                            .collection('favorite')
+                                            .add({
                                           'translateFrom': appState.currentText,
-                                          'translateTo': appState.translatedText,
+                                          'translateTo':
+                                              appState.translatedText,
                                         });
                                       },
                                       icon: Icon(
@@ -206,7 +215,10 @@ class HomeScreen extends StatelessWidget {
                                       fontSize: 15.0,
                                       color: appState.error
                                           ? Colors.red
-                                          : Colors.black,
+                                          : appState.currentTheme !=
+                                                  ThemeData.dark()
+                                              ? Colors.black
+                                              : Colors.white,
                                     ),
                                   ),
                           )
